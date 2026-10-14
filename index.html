@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AstroPhase: Interactive Lunar Calendar & Eclipse Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <h1>AstroPhase</h1>
+            <p class="subtitle">Interactive Lunar Calendar, Phase Calculator & Orbital Simulator</p>
+        </div>
+        <div class="header-actions">
+            <button id="btn-today" class="btn secondary">Jump to Today</button>
+        </div>
+    </header>
+
+    <main class="main-grid">
+        <!-- Left Column: Visualizers -->
+        <section class="visualizer-section card">
+            <h2>Orbital Alignment Simulator</h2>
+            <div class="canvas-container">
+                <canvas id="orbitalCanvas" width="400" height="400" aria-label="Top-down orbital view of Sun, Earth, and Moon"></canvas>
+                <div class="orbit-legend">
+                    <span class="legend-item"><span class="dot sun"></span> Sun Light</span>
+                    <span class="legend-item"><span class="dot earth"></span> Earth</span>
+                    <span class="legend-item"><span class="dot moon"></span> Moon</span>
+                </div>
+            </div>
+
+            <div class="phase-display-container">
+                <div class="moon-render-box">
+                    <canvas id="moonCanvas" width="180" height="180" aria-label="Rendered Moon phase view"></canvas>
+                </div>
+                <div class="phase-stats">
+                    <h3 id="phaseName">New Moon</h3>
+                    <div class="stat-row"><span>Illumination:</span> <strong id="statIllumination">0.0%</strong></div>
+                    <div class="stat-row"><span>Moon Age:</span> <strong id="statAge">0.0 days</strong></div>
+                    <div class="stat-row"><span>Distance:</span> <strong id="statDistance">384,400 km</strong></div>
+                    <div class="stat-row eclipse-alert" id="eclipseAlert"><span>Status:</span> <strong id="statEclipse">Normal Orbit</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Column: Controls & Calendar -->
+        <section class="controls-section">
+            <!-- Time Controls Card -->
+            <div class="card control-card">
+                <h2>Time Control</h2>
+                <div class="date-picker-group">
+                    <label for="dateInput">Select Date:</label>
+                    <input type="date" id="dateInput">
+                </div>
+
+                <div class="slider-group">
+                    <label for="timeSlider">Time Scrubber (Day Offset): <span id="sliderVal">0</span>d</label>
+                    <input type="range" id="timeSlider" min="-30" max="30" value="0" step="1">
+                </div>
+
+                <div class="button-row">
+                    <button id="btn-play" class="btn primary">Play Animation</button>
+                    <button id="btn-prev-phase" class="btn secondary">Prev Phase</button>
+                    <button id="btn-next-phase" class="btn secondary">Next Phase</button>
+                </div>
+            </div>
+
+            <!-- Lunar Month Calendar -->
+            <div class="card calendar-card">
+                <h2>Current Synodic Cycle</h2>
+                <p class="card-desc">Key phases for the lunar cycle surrounding selected date.</p>
+                <div class="phase-grid" id="phaseGrid">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- Astronomical Info Card -->
+            <div class="card info-card">
+                <h2>Lunar Science Note</h2>
+                <p id="scienceNote">The Moon's phases are caused by its position relative to the Earth and Sun. As the Moon orbits our planet, we see varying amounts of its sunlit hemisphere.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>AstroPhase &bull; Pure Vanilla JS Astronomical Explorer</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
